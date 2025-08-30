@@ -12,6 +12,7 @@ public class TwoDimensionalArray {
         // [ , X,  ]
         // [X,  , X]
 
+
         return new char[0][0];
     }
 }
