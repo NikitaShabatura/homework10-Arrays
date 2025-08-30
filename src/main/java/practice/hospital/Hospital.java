@@ -1,9 +1,18 @@
 package practice.hospital;
 
+import java.util.Random;
+
 public class Hospital {
 
     public static float[] generatePatientsTemperatures(int patientsCount) {
-        return new float[0];
+        float[] patientsTemperatures = new float[patientsCount];
+        float minTemperature = 32.0F;
+        float maxTemperature = 40.0F;
+
+        for (int i = 0; i < patientsCount; i++) {
+            patientsTemperatures[i] = new Random().nextFloat(maxTemperature - minTemperature) + minTemperature;
+        }
+        return patientsTemperatures;
     }
 
     public static String getReport(float[] temperatureData) {
@@ -14,11 +23,33 @@ public class Hospital {
             а температуры каждого пациента до 1 знака после запятой
         */
 
+        String patientTemperatures = "";
+        for (int i = 0; i < temperatureData.length; i++) {
+            if (i == temperatureData.length - 1) {
+                patientTemperatures += String.valueOf(temperatureData[i]);
+                break;
+            }
+            patientTemperatures += String.valueOf(temperatureData[i]) + ' ';
+        }
+
+        float averageTemperature = 0.0f;
+        for (int i = 0; i < temperatureData.length; i++) {
+            averageTemperature += temperatureData[i];
+        }
+        float resultAverageTemperature = Math.round((averageTemperature / (float) temperatureData.length) * 100) / 100.0f;
+
+        int healthyPatients = 0;
+        for (int i = 0; i < temperatureData.length; i++) {
+            if (temperatureData[i] >= 36.2f && temperatureData[i] <= 36.9f) {
+                healthyPatients++;
+            }
+        }
+
 
         String report =
-            "Температуры пациентов: " + 1 +
-            "\nСредняя температура: " + 0 +
-            "\nКоличество здоровых: " + 0;
+            "Температуры пациентов: " + patientTemperatures +
+            "\nСредняя температура: " + resultAverageTemperature +
+            "\nКоличество здоровых: " + healthyPatients;
 
         return report;
     }
