@@ -12,7 +12,17 @@ public class TwoDimensionalArray {
         // [ , X,  ]
         // [X,  , X]
 
+        char[][] result = new char[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int y = 0; y < size; y++) {
+                if (i == y || y == size - i - 1) {
+                    result[i][y] = SYMBOL;
+                } else {
+                    result[i][y] = ' ';
+                }
+            }
+        }
 
-        return new char[0][0];
+        return result;
     }
 }
